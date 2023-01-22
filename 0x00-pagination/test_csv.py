@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """read"""
-import csv
 
-with open("Popular_Baby_Names.csv") as f:
-    data = csv.reader(f)
-    s = [row for row in data]
-    print(s[1:10])
+
+Server = __import__('1-simple_pagination').Server
+server = Server()
+print(server.get_page(1, 3))
+print(server.get_page(3, 2))
+print(server.get_page(3000, 100))
