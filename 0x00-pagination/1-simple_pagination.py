@@ -35,6 +35,7 @@ class Server:
         try:
             start = page_size * (page - 1)
             end = (page_size * page)
-            return self.__dataset[start:end]
+            data = self.__dataset[start:end]
+            return data
         except(IndexError):
             return []
