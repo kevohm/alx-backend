@@ -30,13 +30,11 @@ class Server:
         """find the correct indexes to paginate the dataset
         correctly and return the appropriate page of the dataset
         """
-        if isinstance(page, int) and isinstance(page_size, int):
-            assert page > 0 and page_size > 0
-            try:
-                start = page_size * (page - 1)
-                end = (page_size * page) + 1
-                return self.__dataset[start:end]
-            except(IndexError):
-                return []
-        else:
-            raise(AssertionError)
+        assert isinstance(page, int) and isinstance(page_size, int)
+        assert page > 0 and page_size > 0
+        try:
+            start = page_size * (page - 1)
+            end = (page_size * page)
+            return self.__dataset[start:end]
+        except(IndexError):
+            return []
