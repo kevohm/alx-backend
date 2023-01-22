@@ -3,6 +3,7 @@
 0-simple_helper_function
 """
 
+
 def index_range(page, page_size):
     """
     return a tuple of size two containing a start index and an end index
