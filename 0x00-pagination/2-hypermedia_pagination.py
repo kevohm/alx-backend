@@ -40,7 +40,7 @@ class Server:
         except(IndexError):
             return []
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """page_size: the length of the returned dataset page
         page: the current page number
         data: the dataset page (equivalent to return from previous task)
