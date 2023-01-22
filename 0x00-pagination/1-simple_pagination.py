@@ -34,7 +34,7 @@ class Server:
             assert page > 0 and page_size > 0
             try:
                 start = page_size * (page - 1)
-                end = (page_size * page_size) + 1
+                end = (page_size * page) + 1
                 return self.__dataset[start:end]
             except(IndexError):
                 return []
