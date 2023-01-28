@@ -4,6 +4,13 @@
 import unittest
 from parameterized import parameterized
 from unittest.mock import patch
+from typing import (
+    Mapping,
+    Sequence,
+    Any,
+    Dict,
+    Callable,
+)
 access_nested_map = __import__("utils").access_nested_map
 get_json = __import__("utils").get_json
 
@@ -16,13 +23,13 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2)
         ])
-    def test_access_nested_map(self, nested_map, path, expected):
+    def test_access_nested_map(self, nested_map: Mapping, path: Sequence, expected) -> None:
         """test that the method returns what it is supposed to
         """
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
     @parameterized.expand([({}, ('a',)), ({'a': 1}, ('a', 'b'))])
-    def test_access_nested_map_exception(self, nested_map, path):
+    def test_access_nested_map_exception(self, nested_map: Mapping, path: Sequence) -> None:
         """test KeyError in method
         """
         with self.assertRaises(KeyError) as err:
@@ -40,12 +47,12 @@ def mocked_method(*args, **kwargs):
     class Req:
         """mock of class Requests.get
         """
-        def __init__(self, resp):
+        def __init__(self, resp: Dict) -> None:
             """initializer
             """
             self.resp = resp
 
-        def json(self):
+        def json(self)->Dict:
             """mock of json()
             """
             return self.resp
@@ -62,7 +69,7 @@ class TestGetJson(unittest.TestCase):
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
         ])
-    def test_get_json(self, test_url, test_payload):
+    def test_get_json(self, test_url: str, test_payload: Dict) -> None:
         """ test get_json
         """
         with patch("requests.get", side_effect=mocked_method) as get:
