@@ -33,22 +33,27 @@ class TestAccessNestedMap(unittest.TestCase):
                 err_raised = i
         self.assertEqual(str(err.exception)[1], str(err_raised))
 
+
 def mocked_method(*args, **kwargs):
-        class Req:
-            """mock of class Requests.get
+    """mocking with requests.get
+    """
+    class Req:
+        """mock of class Requests.get
+        """
+        def __init__(self, resp):
+            """initializer
             """
-            def __init__(self, resp):
-                """initializer
-                """
-                self.resp = resp
-            def json(self):
-                """mock of json()
-                """
-                return self.resp
+            self.resp = resp
+
+        def json(self):
+            """mock of json()
+            """
+            return self.resp
         if args[0] == "http://example.com":
             return Req({"payload": True})
         elif args[0] == "http://holberton.io":
             return Req({"payload": False})
+
 
 class TestGetJson(unittest.TestCase):
     """Class tests get_json
@@ -63,7 +68,6 @@ class TestGetJson(unittest.TestCase):
         with patch("requests.get", side_effect=mocked_method) as get:
             self.assertEqual(get_json(test_url), test_payload)
         get.assert_called_once()
-
 
 
 if __name__ == '__main__':
