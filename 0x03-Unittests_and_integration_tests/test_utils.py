@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""test_utils
+"""test_utils for testing Classes
 """
 import unittest
 from parameterized import parameterized
@@ -48,7 +48,7 @@ def mocked_method(*args, **kwargs):
         """mock of class Requests.get
         """
         def __init__(self, resp: Dict) -> None:
-            """initializer
+            """initializer of Req
             """
             self.resp = resp
 
@@ -70,7 +70,7 @@ class TestGetJson(unittest.TestCase):
         ("http://holberton.io", {"payload": False})
         ])
     def test_get_json(self, test_url: str, test_payload: Dict) -> None:
-        """ test get_json
+        """ test get_json method using mock method
         """
         with patch("requests.get", side_effect=mocked_method) as get:
             self.assertEqual(get_json(test_url), test_payload)
