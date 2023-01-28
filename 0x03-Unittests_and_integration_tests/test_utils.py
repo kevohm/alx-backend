@@ -49,10 +49,10 @@ def mocked_method(*args, **kwargs):
             """mock of json()
             """
             return self.resp
-        if args[0] == "http://example.com":
-            return Req({"payload": True})
-        elif args[0] == "http://holberton.io":
-            return Req({"payload": False})
+    if args[0] == "http://example.com":
+        return Req({"payload": True})
+    elif args[0] == "http://holberton.io":
+        return Req({"payload": False})
 
 
 class TestGetJson(unittest.TestCase):
