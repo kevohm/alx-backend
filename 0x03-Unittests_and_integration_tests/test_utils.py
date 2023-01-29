@@ -7,6 +7,7 @@ from unittest.mock import patch
 from typing import (
     Mapping,
     Sequence,
+    Tuple,
     Any,
     Dict,
     Callable,
@@ -23,13 +24,15 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2)
         ])
-    def test_access_nested_map(self, nested_map: Mapping, path: Sequence, expected) -> None:
+    def test_access_nested_map(self, nested_map: Dict, path: Tuple[str, str],
+                               expected: any) -> None:
         """test that the method returns what it is supposed to
         """
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
     @parameterized.expand([({}, ('a',)), ({'a': 1}, ('a', 'b'))])
-    def test_access_nested_map_exception(self, nested_map: Mapping, path: Sequence) -> None:
+    def test_access_nested_map_exception(self, nested_map: Dict,
+                                         path: Tuple[str, str]) -> None:
         """test KeyError in method
         """
         with self.assertRaises(KeyError) as err:
@@ -41,7 +44,7 @@ class TestAccessNestedMap(unittest.TestCase):
         self.assertEqual(str(err.exception)[1], str(err_raised))
 
 
-def mocked_method(*args, **kwargs):
+def mocked_method(*args: str, **kwargs: str):
     """mocking with requests.get
     """
     class Req:
