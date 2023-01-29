@@ -12,8 +12,7 @@ from typing import (
     Dict,
     Callable,
 )
-access_nested_map = __import__("utils").access_nested_map
-get_json = __import__("utils").get_json
+from utils import access_nested_map, get_json
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -55,7 +54,7 @@ def mocked_method(*args: str, **kwargs: str):
             """
             self.resp = resp
 
-        def json(self)->Dict:
+        def json(self) -> Dict:
             """mock of json()
             """
             return self.resp
