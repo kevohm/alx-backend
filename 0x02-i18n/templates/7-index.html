@@ -1,0 +1,7 @@
+<title>{{ _('Welcome to Holberton') }}</title>
+<h1>{{ _('Hello world!') }}</h1>
+{% if user %}
+<p>{{_('You are logged in as %(username)s.', username=user.name)}}</p>
+{% else %}
+<p>{{_('You are not logged in.')}}</p>
+{% endif %}
